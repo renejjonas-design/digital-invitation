@@ -291,20 +291,3 @@ if (memoryQR) {
 
     document.head.appendChild(qrScript);
 }
-
-/* MOBILE DECORATION REFINEMENT */
-@media (max-width: 600px) {
-
-    .flowers-top {
-        width: 230px;
-        top: -10px;
-        left: -10px;
-    }
-
-    .flowers-bottom {
-        width: 260px;
-        right: -10px;
-        bottom: -10px;
-    }
-
-}
