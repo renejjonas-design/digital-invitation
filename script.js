@@ -164,12 +164,13 @@ imageViewer.addEventListener("click", function (event) {
 });
 
 
-/* =================================
-   RSVP FORM
-   ================================= */
+/* RSVP FORM */
 
 const rsvpForm = document.getElementById("rsvpForm");
 const rsvpMessage = document.getElementById("rsvpMessage");
+
+const rsvpScriptURL =
+    "https://script.google.com/macros/s/AKfycbxbZfVFOZFjvU0gtbBlbUjOIrIw3Mm0MIDWEBf7005-8b29TtxaAdS6lLa1Y2v7p0tcGw/exec";
 
 if (rsvpForm) {
 
@@ -184,24 +185,57 @@ if (rsvpForm) {
             document.getElementById("attendance").value;
 
         if (!guestName || !attendance) {
+
             rsvpMessage.textContent =
                 "Please complete the required fields.";
 
             return;
         }
 
-        if (attendance === "yes") {
+        rsvpMessage.textContent =
+            "Submitting your RSVP...";
+
+        fetch(rsvpScriptURL, {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify({
+                guestName: guestName,
+                attendance: attendance
+            })
+
+        })
+        .then(function () {
+
+            if (attendance === "yes") {
+
+                rsvpMessage.textContent =
+                    `Thank you, ${guestName}! We look forward to celebrating with you. 💛`;
+
+            } else {
+
+                rsvpMessage.textContent =
+                    `Thank you for letting us know, ${guestName}. 💛`;
+
+            }
+
+            rsvpForm.reset();
+
+        })
+        .catch(function (error) {
+
+            console.error("RSVP submission error:", error);
 
             rsvpMessage.textContent =
-                `Thank you, ${guestName}! We look forward to celebrating with you. 💛`;
+                "Sorry, there was a problem submitting your RSVP. Please try again.";
 
-        } else {
-
-            rsvpMessage.textContent =
-                `Thank you for letting us know, ${guestName}. 💛`;
-        }
-
-        rsvpForm.reset();
+        });
 
     });
 }
