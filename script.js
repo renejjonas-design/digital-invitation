@@ -302,7 +302,7 @@ revealElements.forEach(function (element) {
    ================================= */
 
 const memoryDriveLink =
-    "https://drive.google.com/drive/folders/12uXxI4Ho58gLZCOiJ0RwXAS0LWuIBYT3";
+    "https://script.google.com/macros/s/AKfycbxbZfVFOZFjvU0gtbBlbUjOIrIw3Mm0MIDWEBf7005-8b29TtxaAdS6lLa1Y2v7p0tcGw/exec";";
 
 const memoryQR = document.getElementById("memoryQR");
 
